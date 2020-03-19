@@ -11,10 +11,10 @@ from utils.cancer_simulation import get_cancer_sim_data
 
 def init_arg():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--chemo_coeff", default=4, type=int)
-    parser.add_argument("--radio_coeff", default=4, type=int)
+    parser.add_argument("--chemo_coeff", default=2, type=int)
+    parser.add_argument("--radio_coeff", default=2, type=int)
     parser.add_argument("--results_dir", default='results')
-    parser.add_argument("--model_name", default="crn_test_4")
+    parser.add_argument("--model_name", default="crn_test_2")
     parser.add_argument("--b_encoder_hyperparm_tuning", default=False)
     parser.add_argument("--b_decoder_hyperparm_tuning", default=False)
     return parser.parse_args()
@@ -29,7 +29,7 @@ if __name__ == '__main__':
 
     logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
     pickle_map = get_cancer_sim_data(chemo_coeff=args.chemo_coeff, radio_coeff=args.radio_coeff, b_load=False,
-                                     b_save=False, model_root=args.results_dir)
+                                          b_save=False, model_root=args.results_dir)
 
     encoder_model_name = 'encoder_' + args.model_name
     encoder_hyperparams_file = '{}/{}_best_hyperparams.txt'.format(args.results_dir, encoder_model_name)
@@ -43,6 +43,7 @@ if __name__ == '__main__':
                                     encoder_hyperparams_file=encoder_hyperparams_file,
                                     b_encoder_hyperparm_tuning=args.b_encoder_hyperparm_tuning)
 
+
     decoder_model_name = 'decoder_' + args.model_name
     decoder_hyperparams_file = '{}/{}_best_hyperparams.txt'.format(args.results_dir, decoder_model_name)
 
@@ -54,7 +55,7 @@ if __name__ == '__main__':
 
     max_projection_horizon = 5
     projection_horizon = 5
-
+    
     rmse_decoder = test_CRN_decoder(pickle_map=pickle_map, max_projection_horizon=max_projection_horizon,
                                     projection_horizon=projection_horizon,
                                     models_dir=models_dir,

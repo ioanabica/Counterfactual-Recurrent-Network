@@ -1,16 +1,16 @@
 # Copyright (c) 2020, Ioana Bica
 
-import pickle
 import numpy as np
 import pandas as pd
 
 from CRN_model import CRN_Model
 
+import pickle
+
 
 def write_results_to_file(filename, data):
     with open(filename, 'wb') as handle:
         pickle.dump(data, handle, protocol=2)
-
 
 def append_results_to_file(filename, data):
     with open(filename, 'a+b') as handle:
@@ -121,10 +121,10 @@ def get_processed_data(raw_sim_data,
 
 
 def get_mse_at_follow_up_time(mean, output, active_entires):
-    mses = np.sum(np.sum((mean - output) ** 2 * active_entires, axis=-1), axis=0) \
-           / active_entires.sum(axis=0).sum(axis=-1)
+        mses = np.sum(np.sum((mean - output) ** 2 * active_entires, axis=-1), axis=0) \
+               / active_entires.sum(axis=0).sum(axis=-1)
 
-    return pd.Series(mses, index=[idx for idx in range(len(mses))])
+        return pd.Series(mses, index=[idx for idx in range(len(mses))])
 
 
 def train_BR_optimal_model(dataset_train, dataset_val, hyperparams_file, model_name, model_folder,
@@ -152,3 +152,6 @@ def train_BR_optimal_model(dataset_train, dataset_val, hyperparams_file, model_n
     else:
         model = CRN_Model(params, best_hyperparams)
     model.train(dataset_train, dataset_val, model_name=model_name, model_folder=model_folder)
+
+
+

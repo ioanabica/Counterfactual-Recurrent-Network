@@ -81,12 +81,12 @@ class CRN_Model:
 
         return treatment_prob_predictions
 
-    def build_outcomes(self, balancing_representation):
+    def build_outcomes(self, balancing_representation,):
         current_treatments_reshape = tf.reshape(self.current_treatments, [-1, self.num_treatments])
 
         outcome_network_input = tf.concat([balancing_representation, current_treatments_reshape], axis=-1)
         outcome_network_layer = tf.layers.dense(outcome_network_input, self.fc_hidden_units,
-                                                activation=tf.nn.elu)
+                                                    activation=tf.nn.elu)
         outcome_predictions = tf.layers.dense(outcome_network_layer, self.num_outputs, activation=None)
 
         return outcome_predictions
@@ -335,7 +335,7 @@ class CRN_Model:
         num_batches = int(dataset_size / batch_size) + 1
 
         batch_id = 0
-        num_samples = 30
+        num_samples = 50
         for (batch_current_covariates, batch_previous_treatments,
              batch_current_treatments, batch_init_state) in self.gen_epoch(dataset, batch_size=batch_size,
                                                                            training_mode=False):
