@@ -95,6 +95,5 @@ If you use this code, please cite:
   author={Bica, Ioana and Alaa, Ahmed M and Jordon, James and van der Schaar, Mihaela},
   journal={International Conference on Learning Representations},
   year={2020}
-}ear={2020}
 }
 ```
